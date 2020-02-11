@@ -1,0 +1,70 @@
+<nav class="app-navbar navbar navbar-expand-lg">
+
+  <h1 class="m-auto text-white">Tareas.app</h1>
+
+</nav>
+
+<div class="contenedor">
+
+  <main>
+
+    <section>
+
+      <div *ngIf="alerta" class="alert alert-{{alerta.tipo}} alert-dismissible" role="alert">
+        {{alerta.cuerpo}}
+      </div>
+
+      <div class="nueva-tarea">
+
+        <div class="form-inline">
+
+          <input spellcheck="false" type="text" class="form-control mb-2 mr-sm-2" placeholder="Introducir tarea"
+            [(ngModel)]="tituloTarea">
+          <button class="btn btn-primary mb-2" (click)="onCrear(tituloTarea)">Crear</button>
+
+        </div>
+
+      </div><!-- .nueva-tarea -->
+
+      <!-- <hr> -->
+      <h5 class="">Tareas:</h5>
+      <ul>
+
+        <li *ngFor="let t of tareas">
+
+          <div class="row form-inline">
+
+            <div class="tarea-check col-2">
+
+              <i (click)="onCheck(t)" [hidden]="t.completada" class="far fa-square"></i>
+              <i (click)="onCheck(t)" [hidden]="!t.completada" class="far fa-check-square"></i>
+
+            </div>
+
+            <div class="tarea col-8">
+
+              <span spellcheck="false" class="{{(t.completada) ? 'completada' : ''}} tarea-titulo mb-2 mr-sm-2"
+                contenteditable="true" [textContent]="t.titulo" (input)="t.otro=$event.target.textContent"
+                (blur)="onModificar(t.otro, t)"></span>
+
+            </div><!-- .col-10 -->
+            <div class="tarea-boton col-2">
+              <button class="btn btn-light mb-2" (click)="onBorrar(t)"><span
+                  class="tarea-papelera fas fa-trash"></span></button>
+            </div><!-- .col-2 -->
+          </div><!-- .row -->
+        </li><!-- ngFor -->
+
+      </ul>
+
+    </section>
+
+  </main>
+</div><!-- .contenedor -->
+
+<nav class="footer app-navbar navbar navbar-expand-lg">
+
+  <p class="m-auto text-center text-white">&copy; Erlantz Caballero Garcia<br>
+    <a target="_blank" href="https://erlantzcg89.github.io/trabajos/">Github: <i class="fab fa-github"></i></a></p>
+
+</nav>
