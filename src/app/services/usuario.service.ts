@@ -19,6 +19,13 @@ export class UsuarioService {
 
   estaLogeado(): boolean {
     console.trace('UsuarioService estaLogeado');
+
+    this.usuario = JSON.parse(sessionStorage.getItem('usuario'));
+
+    if (this.usuario) {
+      this.isLogged = true;
+    }
+
     return this.isLogged;
   }
 
@@ -34,9 +41,12 @@ export class UsuarioService {
       sesion = new Usuario();
       sesion.nombre = nombre;
       sesion.password = password;
+      sesion.repo = 'https://api.myjson.com/bins/qxe9w';
       sesion.id = 99;
-      // marcar que esta logeado
+
       this.isLogged = true;
+
+      sessionStorage.setItem('usuario', JSON.stringify(sesion));
 
     } else {
       console.trace('usuario NO encontrado');
@@ -49,6 +59,7 @@ export class UsuarioService {
   cerrarSesion() {
     console.trace('UsuarioService cerrarSesion');
     this.isLogged = false;
+    sessionStorage.removeItem('usuario');
   }
 
 }// UsuarioService

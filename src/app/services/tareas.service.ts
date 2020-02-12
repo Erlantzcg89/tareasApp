@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Tarea } from '../model/tarea';
+import { Usuario } from '../model/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -14,30 +15,21 @@ export class TareasService {
 
   }
 
-  listar(): Observable<Tarea[]> {
-    const url = `http://localhost:3000/tareas/`;
+  public listar(): Observable<Tarea[]> {
+    const url = `https://api.myjson.com/bins/qxe9w`;
     console.trace('TareasService tareas' + url);
     return this.http.get<Tarea[]>(url);
   }
 
-  detalle(id: number): Observable<Tarea> {
-    const url = `http://localhost:3000/tareas/{{id}}`;
+  public modificar(tareas: Array<Tarea>): Observable<Tarea[]> {
+    const url = `https://api.myjson.com/bins/qxe9w`;
+    return this.http.put<Tarea[]>(url, tareas);
+  }
+
+  public listarUsuarios(): Observable<Usuario[]> {
+    const url = `https://api.myjson.com/bins/vl7xw`;
     console.trace('TareasService tareas' + url);
-    return this.http.get<Tarea>(url);
+    return this.http.get<Usuario[]>(url);
   }
 
-  public crear(tarea: Tarea): Observable<Tarea> {
-    const url = `http://localhost:3000/tareas/`;
-    return this.http.post<Tarea>(url, tarea);
-  }
-
-  public modificar(tarea: Tarea): Observable<Tarea> {
-    const url = `http://localhost:3000/tareas/${tarea.id}`;
-    return this.http.put<Tarea>(url, tarea);
-  }
-
-  public borrar(id: number): Observable<Tarea> {
-    const url = `http://localhost:3000/tareas/${id}`;
-    return this.http.delete<Tarea>(url);
-  }
 }

@@ -60,38 +60,50 @@ export class TareasComponent implements OnInit {
 
   }// onGet
 
-  onCheck(tarea: Tarea) {
-    console.trace('onCheck tarea: %o', tarea);
+  onCheck(t: Tarea) {
+    console.trace('onCheck tarea: %o', t);
 
-    tarea.completada = !tarea.completada
+    t.completada = !t.completada
 
-    this.tareasService.modificar(tarea).subscribe(
+    this.tareas.splice(this.tareas.indexOf(t), 1, t);
+
+    this.tareasService.modificar(this.tareas).subscribe(
       data => {
-        console.debug('modificar tarea ok %o', data);
-
-        this.onGet();
-
-      },
-      error => console.warn(error)
-    );
-
-  }// onCheck
-
-  onBorrar(t: Tarea) {
-    console.trace('onBorrar id: %o', t.id);
-
-    this.tareasService.borrar(t.id).subscribe(
-      data => {
-        console.debug('borrar tarea ok %o', data);
+        console.debug('tarea chequeada (modificar) ok %o', data);
 
         this.onGet();
 
         // this.alerta = new Alerta();
         // this.alerta.tipo = 'success';
         // this.alerta.cuerpo = 'Tarea: "' + t.titulo + '" borrada con éxito';
-
+        // console.log('alerta: %o', this.alerta);
       },
-      error => console.warn(error)
+      error => {
+        console.warn(error);
+      }
+    );
+
+  }// onCheck
+
+  onBorrar(t: Tarea) {
+    console.trace('onBorrar id: %o', t);
+
+    this.tareas.splice(this.tareas.indexOf(t), 1);
+
+    this.tareasService.modificar(this.tareas).subscribe(
+      data => {
+        console.debug('tarea borrada (modificar) ok %o', data);
+
+        this.onGet();
+
+        // this.alerta = new Alerta();
+        // this.alerta.tipo = 'success';
+        // this.alerta.cuerpo = 'Tarea: "' + t.titulo + '" borrada con éxito';
+        // console.log('alerta: %o', this.alerta);
+      },
+      error => {
+        console.warn(error);
+      }
     );
 
   }// onBorrar
@@ -103,26 +115,26 @@ export class TareasComponent implements OnInit {
 
       let t = new Tarea();
       t.titulo = titulo;
+      if (this.tareas.length > 0) {
+        t.id = this.tareas[this.tareas.length - 1].id;
+        t.id++;
+      }
 
-      this.tareasService.crear(t).subscribe(
+      this.tareas.push(t);
+
+      this.tareasService.modificar(this.tareas).subscribe(
         data => {
-          console.debug('crear tarea ok %o', data);
-
-          this.tituloTarea = '';
+          console.debug('tarea creada (modificar) ok %o', data);
 
           this.onGet();
 
           // this.alerta = new Alerta();
           // this.alerta.tipo = 'success';
-          // this.alerta.cuerpo = 'Tarea: "' + t.titulo + '" creada con éxito';
-
+          // this.alerta.cuerpo = 'Tarea: "' + t.titulo + '" borrada con éxito';
+          // console.log('alerta: %o', this.alerta);
         },
         error => {
           console.warn(error);
-
-          this.alerta = new Alerta();
-          this.alerta.tipo = 'danger';
-          this.alerta.cuerpo = 'Aplicación fuera de servicio';
         }
       );
 
@@ -145,25 +157,22 @@ export class TareasComponent implements OnInit {
 
         t.titulo = titulo;
 
-        this.tareasService.modificar(t).subscribe(
+        this.tareas.splice(this.tareas.indexOf(t), 1, t);
+
+        this.tareasService.modificar(this.tareas).subscribe(
           data => {
-            console.debug('crear modificada ok %o', data);
+            console.debug('tarea modificada ok %o', data);
 
             this.onGet();
 
             // this.alerta = new Alerta();
             // this.alerta.tipo = 'success';
-            // this.alerta.cuerpo = 'Tarea: "' + t.titulo + '" modificada con éxito';
-
-            console.log('alerta: %o', this.alerta);
+            // this.alerta.cuerpo = 'Tarea: "' + t.titulo + '" borrada con éxito';
+            // console.log('alerta: %o', this.alerta);
           },
           error => {
             console.warn(error);
-
-            this.alerta = new Alerta();
-            this.alerta.tipo = 'danger';
-            this.alerta.cuerpo = 'Aplicación fuera de servicio';
-          }// servicio no disponible
+          }
         );
 
       } else {
@@ -175,8 +184,6 @@ export class TareasComponent implements OnInit {
       }// titulo ha cambiado pero es incorrecto
 
     }// si el titulo ha cambiado
-
-
 
   }// onModificar
 
