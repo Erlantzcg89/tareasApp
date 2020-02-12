@@ -11,6 +11,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./tareas.component.scss']
 })
 export class TareasComponent implements OnInit {
+  public get usuarioService(): UsuarioService {
+    return this._usuarioService;
+  }
+  public set usuarioService(value: UsuarioService) {
+    this._usuarioService = value;
+  }
 
   tareas: Array<Tarea>;
   tituloTarea: string;
@@ -19,7 +25,7 @@ export class TareasComponent implements OnInit {
 
   constructor(private tareasService: TareasService,
     private router: Router,
-    private usuarioService: UsuarioService) {
+    private _usuarioService: UsuarioService) {
 
     console.trace('TareasComponent constructor');
     this.tareas = [];

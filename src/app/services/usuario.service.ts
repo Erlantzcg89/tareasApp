@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../model/usuario';
+import { USUARIOS } from '../model/constantes';
 
 
 @Injectable({
@@ -9,11 +10,14 @@ export class UsuarioService {
 
   private isLogged: boolean;
   private usuario: Usuario;
+  private usuarios: Array<any>;
+  private sesion: Usuario;
 
   constructor() {
     console.trace('UsuarioService constructor');
     this.isLogged = false;
     this.usuario = undefined;
+    this.usuarios = USUARIOS;
 
   }// constructor
 
@@ -31,30 +35,38 @@ export class UsuarioService {
 
   login(nombre: string, password: string): Usuario {
     console.trace('UsuarioService login nombre %s password %s', nombre, password);
-    const NOMBRE = 'admin';
-    const PASS = 'admin';
-    let sesion: Usuario; // si no entra en el if es "undefined"
 
-    if (NOMBRE === nombre && PASS === password) {
+    this.usuarios.forEach(el => {
+
+      if (el.nombre === nombre && el.password === password) {
+
+        this.isLogged = true;
+        this.sesion = new Usuario();
+        this.sesion.nombre = el.nombre;
+        this.sesion.password = '';
+        this.sesion.repo = el.repo;
+
+      }
+
+    });
+
+    if (this.isLogged) {
       console.trace('usuario encontrado');
-      // crear usuario
-      sesion = new Usuario();
-      sesion.nombre = nombre;
-      sesion.password = password;
-      sesion.repo = 'https://api.myjson.com/bins/qxe9w';
-      sesion.id = 99;
 
-      this.isLogged = true;
-
-      sessionStorage.setItem('usuario', JSON.stringify(sesion));
+      sessionStorage.setItem('usuario', JSON.stringify(this.sesion));
 
     } else {
       console.trace('usuario NO encontrado');
       this.isLogged = false;
     }
 
-    return sesion;
+    return this.sesion;
   }// login
+
+  getSesion() {
+    this.sesion = JSON.parse(sessionStorage.getItem('usuario'));
+    return this.sesion;
+  }// getSesion
 
   cerrarSesion() {
     console.trace('UsuarioService cerrarSesion');
