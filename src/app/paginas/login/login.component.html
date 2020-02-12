@@ -1,0 +1,50 @@
+<nav class="app-navbar navbar navbar-expand-lg">
+
+  <h1 class="m-auto text-white">Tareas.app</h1>
+
+</nav>
+
+<div class="contenedor">
+
+  <main>
+
+    <section>
+
+      <div *ngIf="alerta" class="alert alert-{{alerta.tipo}} alert-dismissible" role="alert">
+        {{alerta.cuerpo}}
+      </div>
+
+      <div class="login">
+
+        login: {{usuarioService.estaLogeado()}}
+
+        <p>Bienvenido a tareas.app, entra en tu cuenta para gestionar tus tareas</p>
+
+        <div class="">
+
+          <form [formGroup]="formulario" (ngSubmit)="enviar(formulario.value)">
+
+            <input formControlName="nombre" spellcheck="false" type="text" class="form-control mb-2 mr-sm-2"
+              placeholder="Nombre">
+            <input formControlName="contra" spellcheck="false" type="text" class="form-control mb-2 mr-sm-2"
+              placeholder="Contraseña">
+
+            <input type="submit" [disabled]="formulario.invalid" class="btn btn-primary btn-block" value="Login">
+
+          </form>
+
+        </div>
+
+      </div><!-- .login -->
+
+    </section>
+
+  </main>
+</div><!-- .contenedor -->
+
+<nav class="footer app-navbar navbar navbar-expand-lg">
+
+  <p class="m-auto text-center text-white">&copy; Erlantz Caballero Garcia<br>
+    <a target="_blank" href="https://github.com/Erlantzcg89">Github: <i class="fab fa-github"></i></a></p>
+
+</nav>

@@ -16,11 +16,13 @@
 
       <div class="nueva-tarea">
 
-        <div class="form-inline">
-
+        <div class="form">
+          <div class="logout">
+            <a *ngIf="usuarioService.estaLogeado()" (click)="onSalir()" class="logout">Cerrar Sesión</a>
+          </div>
           <input spellcheck="false" type="text" class="form-control mb-2 mr-sm-2" placeholder="Introducir tarea"
             [(ngModel)]="tituloTarea">
-          <button class="btn btn-primary mb-2" (click)="onCrear(tituloTarea)">Crear</button>
+          <button class="btn btn-primary btn-block mb-2" (click)="onCrear(tituloTarea)">Crear tarea nueva</button>
 
         </div>
 
@@ -65,6 +67,6 @@
 <nav class="footer app-navbar navbar navbar-expand-lg">
 
   <p class="m-auto text-center text-white">&copy; Erlantz Caballero Garcia<br>
-    <a target="_blank" href="https://erlantzcg89.github.io/trabajos/">Github: <i class="fab fa-github"></i></a></p>
+    <a target="_blank" href="https://github.com/Erlantzcg89">Github: <i class="fab fa-github"></i></a></p>
 
 </nav>

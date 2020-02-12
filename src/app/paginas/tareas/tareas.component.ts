@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Tarea } from 'src/app/model/tarea';
 import { TareasService } from 'src/app/services/tareas.service';
 import { Alerta } from 'src/app/model/alerta';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tareas',
@@ -15,7 +17,9 @@ export class TareasComponent implements OnInit {
   alerta: Alerta;
   habilitado: boolean;
 
-  constructor(private tareasService: TareasService) {
+  constructor(private tareasService: TareasService,
+    private router: Router,
+    private usuarioService: UsuarioService) {
 
     console.trace('TareasComponent constructor');
     this.tareas = [];
@@ -175,5 +179,13 @@ export class TareasComponent implements OnInit {
 
 
   }// onModificar
+
+  onSalir() {
+    console.trace('TareasComponent onSalir');
+
+    this.usuarioService.cerrarSesion();
+    this.router.navigate(['']);
+
+  }// salir
 
 }// TareasCoponent

@@ -1,0 +1,47 @@
+{
+  "tareas": [
+    {
+      "id": 1,
+      "titulo": "pasar a producción",
+      "completada": false,
+      "otro": "pasar a producción"
+    },
+    {
+      "id": 5,
+      "titulo": "github landing page",
+      "completada": false
+    },
+    {
+      "id": 6,
+      "titulo": "pokemonApp-rest",
+      "completada": false
+    },
+    {
+      "id": 7,
+      "titulo": "tarea",
+      "completada": false
+    },
+    {
+      "id": 8,
+      "titulo": "2",
+      "completada": false
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
