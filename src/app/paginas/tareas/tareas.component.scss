@@ -15,8 +15,21 @@
   min-height: 88px;
 }
 
+.app-navbar h1 {
+  position: relative;
+  left: 100px;
+  bottom: 5px;
+
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .app-navbar p {
-  font-size: 18px;
+  font-size: 14px;
+
+  position: relative;
+  right: 120px;
+
 }
 
 .footer {
@@ -42,6 +55,7 @@ main {
   max-width: 800px;
   margin: auto;
   padding: 30px;
+  min-height: 80vh;
 }
 
 .completada {
@@ -108,14 +122,44 @@ hr {
 
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
 
   .contenedor {
-    padding: 0 0 75px;
+    padding: 0 0 0;
   }
 
   main {
     min-height: 80vh;
+
+  }
+
+  .app-navbar h1 {
+    position: initial;
+
+  }
+
+}
+
+@media only screen and (max-width: 700px) {
+
+  .app-navbar h1 {
+    position: initial;
+
+  }
+
+  .app-navbar p {
+    position: initial;
+
+
+  }
+
+}
+
+@media only screen and (max-width: 400px) {
+
+  .app-navbar h1 {
+
+    margin-bottom: 10px;
 
   }
 

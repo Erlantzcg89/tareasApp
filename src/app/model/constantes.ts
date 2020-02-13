@@ -1,7 +1,7 @@
 export const USUARIOS = [
     {
-        'nombre': 'admin',
-        'password': 'admin',
+        'nombre': 'prueba',
+        'password': 'prueba',
         'repo': 'https://api.myjson.com/bins/qxe9w'
     },
     {

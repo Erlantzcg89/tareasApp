@@ -38,7 +38,7 @@ export class UsuarioService {
 
     this.usuarios.forEach(el => {
 
-      if (el.nombre === nombre && el.password === password) {
+      if (el.nombre === nombre.toLowerCase() && el.password === password.toLowerCase()) {
 
         this.isLogged = true;
         this.sesion = new Usuario();
