@@ -1,10 +1,8 @@
 {
-  "tareas": [
-    {
+  "tareas": [{
       "id": 1,
       "titulo": "pasar a producción",
-      "completada": false,
-      "otro": "pasar a producción"
+      "completada": false
     },
     {
       "id": 5,
@@ -27,20 +25,16 @@
       "completada": false
     }
   ],
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
+  "posts": [{
+    "id": 1,
+    "title": "json-server",
+    "author": "typicode"
+  }],
+  "comments": [{
+    "id": 1,
+    "body": "some comment",
+    "postId": 1
+  }],
   "profile": {
     "name": "typicode"
   }
